@@ -1,0 +1,21 @@
+## Obtain All Data from txt file
+all_data <- read.csv("household_power_consumption.txt", header = T, sep = ';', 
+                      na.strings = "?", nrows = 2075259, check.names = F, 
+                      stringsAsFactors = F, comment.char = "", quote = '\"')
+
+##Convert date in all_data to data datatype
+all_data$Date <- as.Date(all_data$Date, format = "%d/%m/%Y")
+
+## Create a subset of the data
+subset_data <- subset(all_data, subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
+
+##Remove Full Data set (all_data)
+rm(all_data)
+
+## Convert dates to datetime data type
+datetime <- paste(as.Date(subset_data$Date), subset_data$Time)
+subset_data$Datetime <- as.POSIXct(datetime)
+
+## Create Second Plot
+plot(subset_data$Global_active_power ~ subset_data$Datetime, type = "l",
+     ylab = "Global Active Power (kilowatts)", xlab = "")
