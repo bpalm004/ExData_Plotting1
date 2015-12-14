@@ -18,4 +18,4 @@ subset_data$Datetime <- as.POSIXct(datetime)
 
 ## Create Second Plot
 plot(subset_data$Global_active_power ~ subset_data$Datetime, type = "l",
-     ylab = "Global Active Power (kilowatts)", xlab = "")
+ylab = "Global Active Power (kilowatts)", xlab = "")
